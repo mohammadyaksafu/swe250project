@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:resqlink/repository/widgets/uihelper.dart';
 
+import '../bottomnav/bottomnavscreen.dart';
+
 class Loginscreen extends StatelessWidget {
   const Loginscreen({super.key});
 
@@ -84,7 +86,10 @@ class Loginscreen extends StatelessWidget {
                       height: 50,
                       width: 200,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Bottomnavscreen()));
+
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           shape: RoundedRectangleBorder(
