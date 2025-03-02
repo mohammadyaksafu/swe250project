@@ -1,61 +1,88 @@
 import 'package:flutter/material.dart';
-
+import 'package:resqlink/domain/constants/appcolors.dart';
+import 'package:resqlink/repository/widgets/predefinedmessages.dart';
 class MassegeScreen extends StatelessWidget {
   const MassegeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /* App Bar */
       appBar: AppBar(
         title: const Text('Send Message'),
-        backgroundColor: Colors.purple, // Consistent theme color
+        centerTitle: true,
+        backgroundColor: AppColors.saffoldBackground,
       ),
+
+      /* */
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Predefined Messages Section
+
             const Text(
               'Predefined Messages',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            _buildPredefinedMessageButton("I need help!", context),
-            _buildPredefinedMessageButton("Call me urgently!", context),
-            _buildPredefinedMessageButton("I'm in danger!", context),
+
+            /*Pre defined Messages */
+            PredifenedMasseges.buildPredefinedMessageButton("I need help!", context),
+            PredifenedMasseges.buildPredefinedMessageButton("Call me urgently!", context),
+            PredifenedMasseges.buildPredefinedMessageButton("I'm in danger!", context),
+
+
             const SizedBox(height: 20),
 
-            // Custom Message Section
+            /*Custom Message Section*/
+
             const Text(
               'Custom Message',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
+
             const SizedBox(height: 10),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Type your message here...',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+
+
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.saffoldBackground,
+                borderRadius: BorderRadius.circular(10),
               ),
-              maxLines: 3,
+              padding: EdgeInsets.all(8),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Type your message here...',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+                maxLines: 3,
+              ),
             ),
+
+
             const SizedBox(height: 20),
 
-            // Send Button
+            /*Send Button */
+
             ElevatedButton(
               onPressed: () {
-                // Add functionality to send the message
                 _showAlert(context, "Message Sent!");
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.purple,
+                backgroundColor: AppColors.saffoldBackground,
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
+
               ),
+
               child: const Text(
                 'Send Message',
                 style: TextStyle(fontSize: 18, color: Colors.white),
@@ -67,31 +94,8 @@ class MassegeScreen extends StatelessWidget {
     );
   }
 
-  // Helper method to build predefined message buttons
-  Widget _buildPredefinedMessageButton(String message, BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: OutlinedButton(
-        onPressed: () {
-          // Add functionality to send the predefined message
-          _showAlert(context, "Message Sent: $message");
-        },
-        style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: Colors.purple),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          padding: const EdgeInsets.symmetric(vertical: 15),
-        ),
-        child: Text(
-          message,
-          style: const TextStyle(fontSize: 16, color: Colors.purple),
-        ),
-      ),
-    );
-  }
 
-  // Helper method to show alerts
+
   void _showAlert(BuildContext context, String message) {
     showDialog(
       context: context,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:resqlink/domain/constants/appcolors.dart';
+import 'package:resqlink/repository/widgets/builddetailsbox.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -6,27 +8,34 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /* App Bar */
       appBar: AppBar(
         title: const Text("Profile"),
         centerTitle: true,
+        backgroundColor: AppColors.saffoldBackground,
         actions: [
           IconButton(
             icon: const Icon(Icons.edit),
             onPressed: () {
-              // Add functionality to edit profile
               print("Edit Profile");
             },
           ),
         ],
       ),
+
+
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Profile Picture Section
+            /* For gap between Averter and Appbar*/
+
             const SizedBox(height: 20),
+
+            /*Averter  */
+
             CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage("assets/profile_picture.jpg"), // Replace with your image asset
+              backgroundImage: AssetImage("assets/images/logo.png"),
               child: Stack(
                 children: [
                   Positioned(
@@ -35,10 +44,13 @@ class ProfileScreen extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: AppColors.saffoldBackground,
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white, width: 2),
                       ),
+
+                      /*For Camera ICon */
+
                       child: const Icon(
                         Icons.camera_alt,
                         size: 20,
@@ -49,7 +61,12 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
+
+            /*Gap between Averter and Name Text */
             const SizedBox(height: 10),
+
+            /*Profile name*/
+
             const Text(
               "Md Yak Safu",
               style: TextStyle(
@@ -57,7 +74,11 @@ class ProfileScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
+            /*Gap Between Email and name */
             const SizedBox(height: 5),
+
+            /*Email in profile */
             const Text(
               "mohammadyaksafu@gmail.com",
               style: TextStyle(
@@ -65,25 +86,32 @@ class ProfileScreen extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
+
+            /*Gap Between email and box*/
             const SizedBox(height: 20),
 
-            // User Details Section
+            /* Usr Details */
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Card(
+
                 elevation: 4,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
+
                 child: Padding(
                   padding: const EdgeInsets.all(16),
+                  /*Card Information */
                   child: Column(
                     children: [
-                      _buildDetailRow(Icons.phone, "01642468704"),
+                      Detailsbox.buildDetailRow(Icons.phone, "01642468704"),
                       const Divider(),
-                      _buildDetailRow(Icons.location_on, "123 Main St, New York, USA"),
+                      Detailsbox.buildDetailRow(Icons.location_on,
+                          "242/B,Salna,Gazipur Sadar, Gazipur "),
                       const Divider(),
-                      _buildDetailRow(Icons.calendar_today, "Joined January 2023"),
+                      Detailsbox.buildDetailRow(
+                          Icons.calendar_today, "Joined January 2023"),
                     ],
                   ),
                 ),
@@ -91,12 +119,14 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // Action Buttons Section
+            /*
+            * Action Button
+            */
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  _buildActionButton(
+                  Detailsbox.buildActionButton(
                     context,
                     "Edit Profile",
                     Icons.edit,
@@ -106,25 +136,24 @@ class ProfileScreen extends StatelessWidget {
                       print("Edit Profile");
                     },
                   ),
+
                   const SizedBox(height: 10),
-                  _buildActionButton(
+                  Detailsbox.buildActionButton(
                     context,
                     "Change Password",
                     Icons.lock,
                     Colors.orange,
                         () {
-                      // Add functionality for changing password
                       print("Change Password");
                     },
                   ),
                   const SizedBox(height: 10),
-                  _buildActionButton(
+                  Detailsbox.buildActionButton(
                     context,
                     "Logout",
                     Icons.logout,
                     Colors.red,
                         () {
-                      // Add functionality for logout
                       print("Logout");
                     },
                   ),
@@ -133,45 +162,6 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
           ],
-        ),
-      ),
-    );
-  }
-
-  // Helper method to build a detail row
-  Widget _buildDetailRow(IconData icon, String text) {
-    return Row(
-      children: [
-        Icon(icon, color: Colors.blue),
-        const SizedBox(width: 10),
-        Text(
-          text,
-          style: const TextStyle(fontSize: 16),
-        ),
-      ],
-    );
-  }
-
-  // Helper method to build an action button
-  Widget _buildActionButton(BuildContext context, String text, IconData icon, Color color, VoidCallback onPressed) {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton.icon(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        icon: Icon(icon, color: Colors.white),
-        label: Text(
-          text,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Colors.white,
-          ),
         ),
       ),
     );

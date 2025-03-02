@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:resqlink/domain/constants/appcolors.dart';
 
 class ContractScreen extends StatefulWidget {
   const ContractScreen({super.key});
@@ -14,7 +15,7 @@ class _ContractScreenState extends State<ContractScreen> {
   @override
   void initState() {
     super.initState();
-    // Check permission status when the screen loads
+
     _checkContactPermission();
   }
 
@@ -43,6 +44,7 @@ class _ContractScreenState extends State<ContractScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.saffoldBackground,
         title: const Text("Contact Permission"),
         centerTitle: true,
       ),
@@ -71,7 +73,7 @@ class _ContractScreenState extends State<ContractScreen> {
             ElevatedButton(
               onPressed: _requestContactPermission,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: AppColors.saffoldBackground,
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
